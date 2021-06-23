@@ -41,7 +41,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
-      - run: gh secret set MYSECRET -b"${SECRET}"
+      - run: cd ${{ github.event.inputs.newRepositoryName }} && gh secret set MYSECRET -b"${SECRET}"
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           SECRET: ${{ secrets.DUMMY_SECRET }}
