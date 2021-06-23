@@ -33,6 +33,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: gh repo clone andrelopesmds/${{ github.event.inputs.newRepositoryName }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Use personal token to list repository secrets
         run: gh secret list
