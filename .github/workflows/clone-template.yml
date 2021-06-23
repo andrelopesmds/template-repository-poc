@@ -32,7 +32,7 @@ jobs:
     environment: prod
     runs-on: ubuntu-latest
     steps:
-      - run: gh repo clone andrelopesmds/${{ github.event.inputs.newRepositoryName }}
+      - run: gh repo clone ${{ github.event.inputs.newRepositoryName }}
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
