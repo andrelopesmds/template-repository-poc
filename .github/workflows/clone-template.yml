@@ -8,7 +8,6 @@ on:
         required: true
 
 jobs:
-
 # Test secrets start - always has access to DUMMY_SECRET (global)
   Test-Check-access-tokens-prod:
     environment: prod
@@ -44,7 +43,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Copy dummy secret for prod
-      - run: cd ${{ github.event.inputs.newRepositoryName }} && gh secret set DUMMY_SECRET_PROD -b"${DUMMY_SECRET_PROD}"
+        run: cd ${{ github.event.inputs.newRepositoryName }} && gh secret set DUMMY_SECRET_PROD -b"${DUMMY_SECRET_PROD}"
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           DUMMY_SECRET_PROD: ${{ DUMMY_SECRET_PROD }}
