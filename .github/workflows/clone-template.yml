@@ -30,7 +30,7 @@ jobs:
     environment: prod
     runs-on: ubuntu-latest
     steps:
-      - run: git clone ${{ github.event.inputs.newRepositoryName }}"
+      - run: git clone ${{ github.event.inputs.newRepositoryName }}
 
       - name: Use personal token to list repository secrets
         run: gh secret list
