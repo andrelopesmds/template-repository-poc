@@ -13,11 +13,6 @@ jobs:
     environment: prod
     runs-on: ubuntu-latest
     steps:
-      - name: Use personal token to list repository secrets
-        run: gh secret list
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-
       - run: echo "${{ secrets.DUMMY_SECRET }}"
       - run: echo "${{ secrets.DUMMY_SECRET_DEV }}"
       - run: echo "${{ secrets.DUMMY_SECRET_PROD }}"
@@ -26,11 +21,6 @@ jobs:
     environment: dev
     runs-on: ubuntu-latest
     steps:
-      - name: Use personal token to list repository secrets
-        run: gh secret list
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-
       - run: echo "${{ secrets.DUMMY_SECRET }}"
       - run: echo "${{ secrets.DUMMY_SECRET_DEV }}"
       - run: echo "${{ secrets.DUMMY_SECRET_PROD }}"
