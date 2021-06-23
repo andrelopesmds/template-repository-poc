@@ -62,7 +62,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Copy dummy secret for dev
-      - run: cd ${{ github.event.inputs.newRepositoryName }} && gh secret set DUMMY_SECRET_DEV -b"${DUMMY_SECRET_DEV} -bval --env=dev"
+        run: cd ${{ github.event.inputs.newRepositoryName }} && gh secret set DUMMY_SECRET_DEV -b"${DUMMY_SECRET_DEV} -bval --env=dev"
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           DUMMY_SECRET_DEV: ${{ DUMMY_SECRET_DEV }}
