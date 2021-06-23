@@ -1,0 +1,26 @@
+name: Clone template PoC with GitHub Actions
+
+on: 
+  workflow_dispatch:
+    inputs:
+      newRepositoryName:
+        description: 'new-repository-name'     
+        required: true
+
+jobs:
+  Clone-template:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "The workflow is now ready to test your code on the runner."
+
+      - run: echo "The new repository name (to be created) is ${{ github.event.inputs.newRepositoryName }}"
+
+      - name: Use personal token to list repository secrets
+        run: gh secret list
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+
