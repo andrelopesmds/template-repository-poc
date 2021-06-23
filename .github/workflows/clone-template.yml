@@ -46,7 +46,7 @@ jobs:
         run: cd ${{ github.event.inputs.newRepositoryName }} && gh secret set DUMMY_SECRET_PROD -b"${DUMMY_SECRET_PROD}"
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-          DUMMY_SECRET_PROD: ${{ DUMMY_SECRET_PROD }}
+          DUMMY_SECRET_PROD: ${{ secrets.DUMMY_SECRET_PROD }}
 
   Copy-dev-secrets:
     environment: dev
@@ -65,5 +65,5 @@ jobs:
         run: cd ${{ github.event.inputs.newRepositoryName }} && gh secret set DUMMY_SECRET_DEV -b"${DUMMY_SECRET_DEV} -bval --env=dev"
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-          DUMMY_SECRET_DEV: ${{ DUMMY_SECRET_DEV }}
+          DUMMY_SECRET_DEV: ${{ secrets.DUMMY_SECRET_DEV }}
 # Copy secrets to new repo end
