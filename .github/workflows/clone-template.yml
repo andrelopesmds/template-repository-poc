@@ -35,6 +35,8 @@ jobs:
       - run: gh repo clone ${{ github.event.inputs.newRepositoryName }}
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+      
+      - run: cd ${{ github.event.inputs.newRepositoryName }}
 
       - name: Use personal token to list repository secrets
         run: gh secret list
