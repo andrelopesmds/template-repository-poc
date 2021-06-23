@@ -1,0 +1,15 @@
+{
+  "name": "template-repository-poc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:andrelopesmds/template-repository-poc.git",
+  "author": "andrelopesmds <andrelopesmds@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "setup-repo": "node setup-repo.js"
+  },
+  "devDependencies": {
+    "@octokit/core": "^3.5.1",
+    "tweetsodium": "^0.0.5"
+  }
+}
