@@ -48,7 +48,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           DUMMY_SECRET_PROD: ${{ secrets.DUMMY_SECRET_PROD }}
 
-  Copy-dev-secrets:
+  Create-dev-env:
+    environment: dev
+    runs-on: ubuntu-latest
+    steps:
+      - run: yarn && yarn run create-env-test
+        env:
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+
+  Copy-dev-secrets-in-dev-environment: ## need to create dev env first
     environment: dev
     runs-on: ubuntu-latest
     steps:
