@@ -61,7 +61,7 @@ jobs:
           node-version: 12
           registry-url: https://npm.pkg.github.com
 
-      - run: yarn && yarn run create-env-test
+      - run: yarn && yarn run create-env
         env:
           PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
