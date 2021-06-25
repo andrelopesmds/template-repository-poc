@@ -48,8 +48,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           DUMMY_SECRET_PROD: ${{ secrets.DUMMY_SECRET_PROD }}
 
-  Create-dev-env:
-    environment: dev
+  Setup-repo:
+    environment: prod
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
@@ -61,7 +61,7 @@ jobs:
           node-version: 12
           registry-url: https://npm.pkg.github.com
 
-      - run: yarn && yarn run create-env
+      - run: yarn && yarn run setup-repo
         env:
           PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 

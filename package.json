@@ -6,7 +6,7 @@
   "author": "andrelopesmds <andrelopesmds@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "create-env": "node create-env-test.js"
+    "setup-repo": "node setup-repo.js"
   },
   "devDependencies": {
     "@octokit/core": "^3.5.1"
