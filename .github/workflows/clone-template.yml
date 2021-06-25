@@ -9,44 +9,24 @@ on:
 
 jobs:
 # Test secrets start - always has access to DUMMY_SECRET (global)
-  Test-Check-access-tokens-prod:
-    environment: prod
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "${{ secrets.DUMMY_SECRET }}"
-      - run: echo "${{ secrets.DUMMY_SECRET_DEV }}"
-      - run: echo "${{ secrets.DUMMY_SECRET_PROD }}"
-      - run: echo "${{ secrets.PERSONAL_TOKEN }}"
+  # Test-Check-access-tokens-prod:
+  #   environment: prod
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo "${{ secrets.DUMMY_SECRET }}"
+  #     - run: echo "${{ secrets.DUMMY_SECRET_DEV }}"
+  #     - run: echo "${{ secrets.DUMMY_SECRET_PROD }}"
+  #     - run: echo "${{ secrets.PERSONAL_TOKEN }}"
 
-  Test-Check-access-tokens-dev:
-    environment: dev
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "${{ secrets.DUMMY_SECRET }}"
-      - run: echo "${{ secrets.DUMMY_SECRET_DEV }}"
-      - run: echo "${{ secrets.DUMMY_SECRET_PROD }}"
-      - run: echo "${{ secrets.PERSONAL_TOKEN }}"
+  # Test-Check-access-tokens-dev:
+  #   environment: dev
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo "${{ secrets.DUMMY_SECRET }}"
+  #     - run: echo "${{ secrets.DUMMY_SECRET_DEV }}"
+  #     - run: echo "${{ secrets.DUMMY_SECRET_PROD }}"
+  #     - run: echo "${{ secrets.PERSONAL_TOKEN }}"
 # Test secrets end
-
-# Copy secrets to new repo start
-  Copy-prod-secrets:
-    environment: prod
-    runs-on: ubuntu-latest
-    steps:
-      - run: gh repo clone ${{ github.event.inputs.newRepositoryName }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-
-      - name: Use personal token to list repository secrets
-        run: cd ${{ github.event.inputs.newRepositoryName }} && gh secret list
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-
-      - name: Copy dummy secret for prod
-        run: cd ${{ github.event.inputs.newRepositoryName }} && gh secret set DUMMY_SECRET_PROD -b"${DUMMY_SECRET_PROD}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-          DUMMY_SECRET_PROD: ${{ secrets.DUMMY_SECRET_PROD }}
 
   Setup-repo:
     environment: prod
@@ -66,22 +46,23 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           NEW_REPOSITORY: ${{ github.event.inputs.newRepositoryName }}
 
-  Copy-dev-secrets-in-dev-environment: ## need to create dev env first
-    environment: dev
-    runs-on: ubuntu-latest
-    steps:
-      - run: gh repo clone ${{ github.event.inputs.newRepositoryName }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+# Copy secrets to new repo start
+#   Copy-prod-secrets:
+#     environment: prod
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: gh repo clone ${{ github.event.inputs.newRepositoryName }}
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
-      - name: Use personal token to list repository secrets
-        run: cd ${{ github.event.inputs.newRepositoryName }} && gh secret list
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+#       - name: Use personal token to list repository secrets
+#         run: cd ${{ github.event.inputs.newRepositoryName }} && gh secret list
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
-      - name: Copy dummy secret for dev
-        run: cd ${{ github.event.inputs.newRepositoryName }} && gh secret set DUMMY_SECRET_DEV -b"${DUMMY_SECRET_DEV} -bval --env=dev"
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-          DUMMY_SECRET_DEV: ${{ secrets.DUMMY_SECRET_DEV }}
-# Copy secrets to new repo end
+#       - name: Copy dummy secret for prod
+#         run: cd ${{ github.event.inputs.newRepositoryName }} && gh secret set DUMMY_SECRET_PROD -b"${DUMMY_SECRET_PROD}"
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+#           DUMMY_SECRET_PROD: ${{ secrets.DUMMY_SECRET_PROD }}
+# # Copy secrets to new repo end
