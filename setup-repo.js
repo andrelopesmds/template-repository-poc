@@ -26,15 +26,6 @@ const protectBranch = async (branch) => {
 
 const run = async () => {
   try {
-    // copy secrets
-    const r = await octokit.request('GET /repos/{owner}/{repo}/actions/secrets/{secret_name}', {
-      owner,
-      repo,
-      secret_name: 'DUMMY_SECRET'  
-    })
-
-    console.log(r)
-
     // add groups
 
     // copy branch protection settings
