@@ -64,6 +64,7 @@ jobs:
       - run: yarn && yarn run setup-repo
         env:
           PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          NEW_REPOSITORY: ${{ github.event.inputs.newRepositoryName }}
 
   Copy-dev-secrets-in-dev-environment: ## need to create dev env first
     environment: dev

@@ -1,11 +1,11 @@
 const { Octokit } = require("@octokit/core");
 
-const { PERSONAL_TOKEN } = process.env;
+const { PERSONAL_TOKEN, NEW_REPOSITORY } = process.env;
 
 const octokit = new Octokit({ auth: PERSONAL_TOKEN });
 
 const owner = 'andrelopesmds';
-const repo = 'template-repository-poc';
+const repo = NEW_REPOSITORY;
 
 const protectBranch = async (branch) => {
   await octokit.request("PUT /repos/{owner}/{repo}/branches/{branch}/protection", {
