@@ -52,7 +52,7 @@ jobs:
     environment: dev
     runs-on: ubuntu-latest
     steps:
-      - run: git clone ${{ github.event.inputs.newRepositoryName }}
+      - run: git clone https://github.com/andrelopesmds/${{ github.event.inputs.newRepositoryName }}.git 
 
       - run: cd .github && cd workflows && rm clone_template.yml
 
