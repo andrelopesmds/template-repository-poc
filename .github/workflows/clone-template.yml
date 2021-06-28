@@ -56,4 +56,4 @@ jobs:
 
       - run: cd ${{ github.event.inputs.newRepositoryName }}/.github/workflows && rm clone-template.yml
 
-      - run: cd ${{ github.event.inputs.newRepositoryName }} && git add . && git commit -m 'Test' && git push
+      - run: cd ${{ github.event.inputs.newRepositoryName }} && git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git add . && git commit -m 'Test' && git push
