@@ -1,6 +1,7 @@
 const { Octokit } = require("@octokit/core");
 
-const { PERSONAL_TOKEN, NEW_REPOSITORY, DUMMY_SECRET_PROD } = process.env;
+const { PERSONAL_TOKEN, NEW_REPOSITORY } = process.env;
+const protectedBranches = ['main', 'dev'];
 
 const octokit = new Octokit({ auth: PERSONAL_TOKEN });
 
@@ -53,8 +54,9 @@ const run = async () => {
     // add groups (?)
 
     // copy branch protection settings
-    await protectBranch(OWNER, NEW_REPOSITORY, 'main');
-    await protectBranch(OWNER, NEW_REPOSITORY, 'dev');
+    for (const branch of protectedBranches) {
+      await protectBranch(OWNER, NEW_REPOSITORY, branch);
+    }
 
   } catch (err) {
     console.log('Something went wrong!');
