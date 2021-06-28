@@ -54,6 +54,6 @@ jobs:
     steps:
       - run: git clone https://github.com/andrelopesmds/${{ github.event.inputs.newRepositoryName }}.git 
 
-      - run: cd .github && cd workflows && rm clone_template.yml
+      - run: cd ${{ github.event.inputs.newRepositoryName }}/.github/workflows && rm clone_template.yml
 
       - run: git add . && git commit -m 'Test' && git push
