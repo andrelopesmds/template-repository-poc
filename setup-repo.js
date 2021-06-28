@@ -53,7 +53,7 @@ const run = async () => {
     // add groups (?)
 
     // copy branch protection settings
-    await protectBranch(OWNER, NEW_REPOSITORY, 'main');
+    //await protectBranch(OWNER, NEW_REPOSITORY, 'main');
     await protectBranch(OWNER, NEW_REPOSITORY, 'dev');
 
   } catch (err) {
