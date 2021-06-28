@@ -46,14 +46,3 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           NEW_REPOSITORY: ${{ github.event.inputs.newRepositoryName }}
           DUMMY_SECRET_ENV: ${{ secrets.DUMMY_SECRET_ENV }}
-
-  Clean-new-repository:
-    needs: Setup-repo
-    environment: dev
-    runs-on: ubuntu-latest
-    steps:
-      - run: git clone https://github.com/andrelopesmds/${{ github.event.inputs.newRepositoryName }}.git 
-
-      - run: cd ${{ github.event.inputs.newRepositoryName }}/.github/workflows && rm clone-template.yml
-
-      - run: cd ${{ github.event.inputs.newRepositoryName }} && git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git add . && git commit -m 'Test' && git push
