@@ -8,28 +8,8 @@ on:
         required: true
 
 jobs:
-# Test secrets start - always has access to DUMMY_SECRET (global)
-  # Test-Check-access-tokens-prod:
-  #   environment: prod
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: echo "${{ secrets.DUMMY_SECRET }}"
-  #     - run: echo "${{ secrets.DUMMY_SECRET_DEV }}"
-  #     - run: echo "${{ secrets.DUMMY_SECRET_PROD }}"
-  #     - run: echo "${{ secrets.PERSONAL_TOKEN }}"
-
-  # Test-Check-access-tokens-dev:
-  #   environment: dev
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: echo "${{ secrets.DUMMY_SECRET }}"
-  #     - run: echo "${{ secrets.DUMMY_SECRET_DEV }}"
-  #     - run: echo "${{ secrets.DUMMY_SECRET_PROD }}"
-  #     - run: echo "${{ secrets.PERSONAL_TOKEN }}"
-# Test secrets end
-
   Setup-repo:
-    environment: prod
+    environment: prod # for some reason we get a warning if this line is removed, though the env is not necessary and the job works anyway
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
@@ -46,25 +26,23 @@ jobs:
           # GITHUB_TOKEN is scoped only to the repository that is currently running the action. Therefore PERSONAL_TOKEN was generated/used.
           PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           NEW_REPOSITORY: ${{ github.event.inputs.newRepositoryName }}
-          DUMMY_SECRET_PROD: ${{ secrets.DUMMY_SECRET_PROD }}
 
-# Copy secrets to new repo start
-#   Copy-prod-secrets:
-#     environment: prod
-#     runs-on: ubuntu-latest
-#     steps:
-#       - run: gh repo clone ${{ github.event.inputs.newRepositoryName }}
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+  Setup-environment-dev:
+    needs: Setup-repo
+    environment: dev
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
 
-#       - name: Use personal token to list repository secrets
-#         run: cd ${{ github.event.inputs.newRepositoryName }} && gh secret list
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com
 
-#       - name: Copy dummy secret for prod
-#         run: cd ${{ github.event.inputs.newRepositoryName }} && gh secret set DUMMY_SECRET_PROD -b"${DUMMY_SECRET_PROD}"
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-#           DUMMY_SECRET_PROD: ${{ secrets.DUMMY_SECRET_PROD }}
-# # Copy secrets to new repo end
+      - run: yarn && yarn run setup-environment
+        env:
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          NEW_REPOSITORY: ${{ github.event.inputs.newRepositoryName }}
+          DUMMY_SECRET_ENV: ${{ secrets.DUMMY_SECRET_ENV }}

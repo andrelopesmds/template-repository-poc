@@ -6,7 +6,8 @@
   "author": "andrelopesmds <andrelopesmds@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "setup-repo": "node setup-repo.js"
+    "setup-repo": "node setup-repo.js",
+    "setup-environment": "node setup-environment.js"
   },
   "devDependencies": {
     "@octokit/core": "^3.5.1",
