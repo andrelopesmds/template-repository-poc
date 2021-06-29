@@ -5,9 +5,6 @@ const { PERSONAL_TOKEN, NEW_REPOSITORY, DUMMY_SECRET_ENV } = process.env;
 
 const octokit = new Octokit({ auth: PERSONAL_TOKEN });
 
-// Better to have this defined in yml
-const OWNER = 'andrelopesmds';
-
 const createEnvironment = async (owner, repo, environmentName) => {
   await octokit.request("PUT /repos/{owner}/{repo}/environments/{environment_name}", {
     owner,

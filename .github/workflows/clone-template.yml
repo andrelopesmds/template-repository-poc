@@ -26,6 +26,8 @@ jobs:
           # GITHUB_TOKEN is scoped only to the repository that is currently running the action. Therefore PERSONAL_TOKEN was generated/used.
           PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           NEW_REPOSITORY: ${{ github.event.inputs.newRepositoryName }}
+          OWNER: andrelopesmds
+          TEMPLATE_REPO: template-repository-poc
 
   Setup-environment-dev:
     needs: Setup-repo
@@ -46,3 +48,4 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           NEW_REPOSITORY: ${{ github.event.inputs.newRepositoryName }}
           DUMMY_SECRET_ENV: ${{ secrets.DUMMY_SECRET_ENV }}
+          OWNER: andrelopesmds

@@ -1,13 +1,10 @@
 const { Octokit } = require("@octokit/core");
 
-const { PERSONAL_TOKEN, NEW_REPOSITORY } = process.env;
+const { PERSONAL_TOKEN, NEW_REPOSITORY, OWNER, TEMPLATE_REPO } = process.env;
+
 const protectedBranches = ['main', 'dev'];
 
 const octokit = new Octokit({ auth: PERSONAL_TOKEN });
-
-// Better to have this defined in yml
-const OWNER = 'andrelopesmds';
-const TEMPLATE_REPO = 'template-repository-poc';
 
 const createRepositoryFromTemplate = async (templateOwner, templateRepo, newRepoName) => {
   const response = await octokit.request("POST /repos/{template_owner}/{template_repo}/generate", {
