@@ -1,3 +1,5 @@
+name: Clean up after cloning
+
 on:
   push:
     branches:
