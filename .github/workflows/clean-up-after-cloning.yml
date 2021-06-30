@@ -1,6 +1,7 @@
 name: Clean up after cloning
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
