@@ -10,7 +10,7 @@ const triggerCleanUpWorkflow = async (owner, repo) => {
     owner,
     repo,
     workflow_id: 'clean-up-after-cloning.yml',
-    ref: 'ref'
+    ref: 'main'
   })
 
   console.log('workflow triggered')
