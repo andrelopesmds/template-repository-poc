@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "setup-repo": "node setup-repo.js",
-    "setup-environment": "node setup-environment.js"
+    "setup-environment": "node setup-environment.js",
+    "trigger-clean-up-workflow": "trigger-clean-up-workflow.js"
   },
   "devDependencies": {
     "@octokit/core": "^3.5.1",

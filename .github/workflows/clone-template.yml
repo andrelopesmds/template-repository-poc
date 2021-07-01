@@ -8,7 +8,7 @@ on:
         required: true
 
 jobs:
-  Setup-repo:
+  setup-repo:
     environment: prod # for some reason we get a warning if this line is removed, though the env is not necessary and the job works anyway
     runs-on: ubuntu-latest
     steps:
@@ -29,7 +29,7 @@ jobs:
           OWNER: andrelopesmds
           TEMPLATE_REPO: template-repository-poc
 
-  Setup-environment-dev:
+  setup-environment-dev:
     needs: Setup-repo
     environment: dev
     runs-on: ubuntu-latest
@@ -48,4 +48,24 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           NEW_REPOSITORY: ${{ github.event.inputs.newRepositoryName }}
           DUMMY_SECRET_ENV: ${{ secrets.DUMMY_SECRET_ENV }}
+          OWNER: andrelopesmds
+
+  trigger-clean-up-workflow:
+    needs: Setup-repo
+    environment: dev
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com
+
+      - run: yarn && yarn run trigger-clean-up-workflow
+        env:
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          NEW_REPOSITORY: ${{ github.event.inputs.newRepositoryName }}
           OWNER: andrelopesmds
