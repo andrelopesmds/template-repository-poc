@@ -1,1 +1,1 @@
-test file
+test file that should be removed from cloned repositories
